@@ -1,11 +1,18 @@
 package com.tahahanci.turkcell_ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name="products")
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product
 {
     @Column(name="id")
@@ -32,6 +39,14 @@ public class Product
     @ManyToOne()
     @JoinColumn(name="brand_id")
     private Brand brand;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+     private List<LikesItem> likesItems;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<WishListItem> wishListItems;
 }
 
 

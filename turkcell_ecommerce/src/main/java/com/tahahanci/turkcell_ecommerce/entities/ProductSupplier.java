@@ -29,7 +29,7 @@ public class ProductSupplier {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToMany(mappedBy = "productsuppliers")
+    @OneToMany(mappedBy = "productSupplier")
     @JsonIgnore
     private List<Discount> discounts;
 

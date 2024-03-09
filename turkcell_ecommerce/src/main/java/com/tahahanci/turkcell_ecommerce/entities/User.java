@@ -1,9 +1,12 @@
 package com.tahahanci.turkcell_ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name="users")
 @Data
@@ -31,5 +34,19 @@ public class User {
 
     @Column(name="password")
     private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<LikesItem> likesItems;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<WishListItem> wishListItems;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+
 
 }
