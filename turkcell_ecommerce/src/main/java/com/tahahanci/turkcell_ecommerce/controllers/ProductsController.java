@@ -1,5 +1,8 @@
 package com.tahahanci.turkcell_ecommerce.controllers;
 
+import com.tahahanci.turkcell_ecommerce.services.dtos.product.requests.AddProductRequest;
+import com.tahahanci.turkcell_ecommerce.services.dtos.product.responses.ProductListResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.tahahanci.turkcell_ecommerce.entities.Product;
@@ -21,12 +24,13 @@ public class ProductsController
     }
 
     @PostMapping
-    public void add(@RequestBody Product product)
+    public void add(@RequestBody @Valid AddProductRequest request)
     {
-        productService.add(product);
+        productService.add(request);
     }
+
     @GetMapping
-    public List<Product> get() {
+    public List<ProductListResponse> get() {
         return productService.getAll();
     }
 }

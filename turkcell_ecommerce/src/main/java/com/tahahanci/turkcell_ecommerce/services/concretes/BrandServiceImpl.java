@@ -18,11 +18,11 @@ public class BrandServiceImpl implements BrandService{
 
     @Override
     public List<Brand> getAll() {
-        return null;
+        return brandRepository.findAll();
     }
 
     @Override
     public Brand add(Brand brand) {
-        return null;
+        return brandRepository.save(brand);
     }
 }
