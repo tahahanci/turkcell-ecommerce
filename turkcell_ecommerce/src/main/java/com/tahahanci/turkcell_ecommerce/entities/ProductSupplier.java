@@ -1,10 +1,14 @@
 package com.tahahanci.turkcell_ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.Mapping;
+
+import java.util.List;
 
 @Entity
 @Table(name = "productsuppliers")
@@ -24,6 +28,10 @@ public class ProductSupplier {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @OneToMany(mappedBy = "productsuppliers")
+    @JsonIgnore
+    private List<Discount> discounts;
 
 
 }
