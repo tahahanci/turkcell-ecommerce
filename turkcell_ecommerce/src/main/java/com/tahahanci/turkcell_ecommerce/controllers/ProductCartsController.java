@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("/api/productCarts")
 public class ProductCartsController {
 
