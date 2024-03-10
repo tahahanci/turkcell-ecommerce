@@ -61,6 +61,19 @@ public class ProductServiceImpl implements ProductService
         return getProductListResponses(products);
     }
 
+    @Override
+    public ProductListResponse getMostExpensive() {
+        Product product = productRepository.getMostExpensiveProduct();
+        return new ProductListResponse(
+                product.getId(),
+                product.getName(),
+                product.getCategory().getName(),
+                product.getPrice(),
+                product.getCategory().getName()
+        );
+
+    }
+
     private List<ProductListResponse> getProductListResponses(List<Product> products) {
         List<ProductListResponse> response = new ArrayList<>();
 

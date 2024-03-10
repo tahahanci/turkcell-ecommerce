@@ -38,4 +38,11 @@ public class ProductsController
     public List<ProductListResponse> getByPrice() {
         return productService.listByAscendingPrice();
     }
+
+    // get most expensive product
+    @GetMapping("/mostExpensive")
+    public ProductListResponse getMostExpensive() {
+        return productService.getMostExpensive();
+    }
+
 }

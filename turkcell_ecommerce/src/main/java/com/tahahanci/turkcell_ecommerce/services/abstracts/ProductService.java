@@ -13,4 +13,5 @@ public interface ProductService
 
     List<ProductListResponse> listByAscendingPrice();
 
+    ProductListResponse getMostExpensive();
 }
