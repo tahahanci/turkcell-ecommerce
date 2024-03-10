@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService
         product.setStock_quantity(request.getStock_quantity());
         product.setCategory(category);
         productRepository.save(product);
+
     }
 
     private void productWithSameNameShouldNotExists(String name) {
@@ -51,9 +52,18 @@ public class ProductServiceImpl implements ProductService
     @Override
     public List<ProductListResponse> getAll() {
         List<Product> products = productRepository.findAll();
+        return getProductListResponses(products);
+    }
+
+    @Override
+    public List<ProductListResponse> listByAscendingPrice() {
+        List<Product> products = productRepository.listByAscendingPrice();
+        return getProductListResponses(products);
+    }
+
+    private List<ProductListResponse> getProductListResponses(List<Product> products) {
         List<ProductListResponse> response = new ArrayList<>();
 
-        // Beginner Level List Mapping
         for (Product product: products) {
             ProductListResponse dto = new ProductListResponse(
                     product.getId(),
@@ -64,7 +74,6 @@ public class ProductServiceImpl implements ProductService
             );
             response.add(dto);
         }
-        // Request - Response (Reply) Pattern
         return response;
     }
 }

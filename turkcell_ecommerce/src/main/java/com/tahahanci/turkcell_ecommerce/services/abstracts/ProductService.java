@@ -10,4 +10,7 @@ public interface ProductService
 {
     void add(AddProductRequest request);
     List<ProductListResponse> getAll();
+
+    List<ProductListResponse> listByAscendingPrice();
+
 }

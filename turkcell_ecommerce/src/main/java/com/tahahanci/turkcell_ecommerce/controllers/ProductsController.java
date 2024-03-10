@@ -33,4 +33,9 @@ public class ProductsController
     public List<ProductListResponse> get() {
         return productService.getAll();
     }
+
+    @GetMapping("/priceAsc")
+    public List<ProductListResponse> getByPrice() {
+        return productService.listByAscendingPrice();
+    }
 }
