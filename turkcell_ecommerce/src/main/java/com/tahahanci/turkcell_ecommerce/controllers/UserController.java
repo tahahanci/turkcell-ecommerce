@@ -2,12 +2,10 @@ package com.tahahanci.turkcell_ecommerce.controllers;
 
 import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.responses.UserListResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,4 +36,11 @@ public class UserController {
     public int getUserCount() {
         return userService.findUserCount();
     }
+
+    //update phone number of user by id
+    @PutMapping("/updatePhoneNumber/{id}")
+    public void updatePhoneNumber(@PathVariable int id, @RequestBody UpdatePhoneNumberRequest phoneNumberRequest) {
+        userService.updatePhoneNumber(id, phoneNumberRequest);
+    }
+
 }

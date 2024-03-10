@@ -3,6 +3,7 @@ package com.tahahanci.turkcell_ecommerce.services.concretes;
 import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.UserRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.responses.UserListResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int findUserCount() {
         return userRepository.getUserCount();
+    }
+
+    @Override
+    public void updatePhoneNumber(int id, UpdatePhoneNumberRequest phoneNumber) {
+        userRepository.updatePhoneNumber(id, phoneNumber.getPhoneNumber());
     }
 
 
