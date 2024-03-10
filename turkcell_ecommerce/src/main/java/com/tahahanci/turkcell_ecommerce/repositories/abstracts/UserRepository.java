@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query("SELECT u FROM User u WHERE u.name LIKE :letter%")
     List<User> searchByLetter(String letter);
+
+    @Query("SELECT COUNT(u) FROM User u")
+    int getUserCount();
 }

@@ -67,11 +67,41 @@ public class ProductServiceImpl implements ProductService
         return new ProductListResponse(
                 product.getId(),
                 product.getName(),
-                product.getCategory().getName(),
+                product.getDescription(),
                 product.getPrice(),
                 product.getCategory().getName()
         );
 
+    }
+
+    @Override
+    public double getAveragePrice() {
+        return productRepository.getAveragePrice();
+    }
+
+    @Override
+    public List<ProductListResponse> getProductsByCategoryName(String categoryName) {
+        List<Product> products = productRepository.getProductsByCategoryName(categoryName);
+
+        List<ProductListResponse> response = new ArrayList<>();
+        for (Product product: products) {
+            ProductListResponse dto = new ProductListResponse(
+                    product.getId(),
+                    product.getName(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getCategory().getName()
+            );
+            response.add(dto);
+        }
+
+        return response;
+
+    }
+
+    @Override
+    public int getNumberOfProductsByBrandName(String brandName) {
+        return productRepository.getNumberOfProductsByBrandName(brandName);
     }
 
     private List<ProductListResponse> getProductListResponses(List<Product> products) {
@@ -81,7 +111,7 @@ public class ProductServiceImpl implements ProductService
             ProductListResponse dto = new ProductListResponse(
                     product.getId(),
                     product.getName(),
-                    product.getCategory().getName(),
+                    product.getDescription(),
                     product.getPrice(),
                     product.getCategory().getName()
             );

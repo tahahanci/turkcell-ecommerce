@@ -14,4 +14,10 @@ public interface ProductService
     List<ProductListResponse> listByAscendingPrice();
 
     ProductListResponse getMostExpensive();
+
+    double getAveragePrice();
+
+    List<ProductListResponse> getProductsByCategoryName(String categoryName);
+
+    int getNumberOfProductsByBrandName(String brandName);
 }

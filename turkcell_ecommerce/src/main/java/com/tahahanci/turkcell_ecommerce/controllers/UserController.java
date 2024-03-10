@@ -32,4 +32,10 @@ public class UserController {
     public List<UserListResponse> getByLetter(String letter) {
         return userService.searchByLetter(letter);
     }
+
+    // get user count
+    @GetMapping("/count")
+    public int getUserCount() {
+        return userService.findUserCount();
+    }
 }

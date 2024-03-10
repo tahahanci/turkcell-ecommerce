@@ -45,4 +45,23 @@ public class ProductsController
         return productService.getMostExpensive();
     }
 
+    //average price of products
+    @GetMapping("/averagePrice")
+    public double getAveragePrice() {
+        return productService.getAveragePrice();
+    }
+
+    // find products by specific category name
+    @GetMapping("/category/{categoryName}")
+    public List<ProductListResponse> getByCategory(@PathVariable String categoryName) {
+        return productService.getProductsByCategoryName(categoryName);
+    }
+
+    // get number of products in given brand name
+    @GetMapping("/brand/{brandName}")
+    public int getNumberOfProductsByBrand(@PathVariable String brandName) {
+        return productService.getNumberOfProductsByBrandName(brandName);
+    }
+
+
 }

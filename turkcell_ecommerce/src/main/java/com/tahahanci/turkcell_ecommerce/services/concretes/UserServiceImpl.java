@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.searchByLetter(letter);
 
         return users.stream().map(user -> new UserListResponse(user.getId(), user.getName(), user.getLastName())).collect(Collectors.toList());
-
     }
+
+    @Override
+    public int findUserCount() {
+        return userRepository.getUserCount();
+    }
+
+
 }

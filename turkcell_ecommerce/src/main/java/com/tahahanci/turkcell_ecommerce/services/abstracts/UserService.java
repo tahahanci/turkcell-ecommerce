@@ -10,4 +10,8 @@ public interface UserService {
     List<User> getAll();
 
     List<UserListResponse> searchByLetter(String letter);
+
+    int findUserCount();
+
+
 }
