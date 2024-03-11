@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Table(name="orders")
 @Data
@@ -34,5 +35,8 @@ public class Order {
 
     @OneToOne(mappedBy = "order")
     private Payment payment;
+
+    @ManyToMany(mappedBy = "orders")
+    private List<Product> products;
 
 }

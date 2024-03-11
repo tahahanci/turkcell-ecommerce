@@ -47,6 +47,13 @@ public class Product
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<WishListItem> wishListItems;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private List<Order> orders;
 }
 
 
