@@ -29,6 +29,9 @@ public class Order {
     @JoinColumn(name="user_id")
     private User user;
 
+    @Column(name="amount")
+    private double amount;
+
     @ManyToOne
     @JoinColumn(name="address_id")
     private Address adress;

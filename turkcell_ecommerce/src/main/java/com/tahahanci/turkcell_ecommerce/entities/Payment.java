@@ -16,9 +16,6 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="amount")
-    private double amount;
-
     @OneToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;

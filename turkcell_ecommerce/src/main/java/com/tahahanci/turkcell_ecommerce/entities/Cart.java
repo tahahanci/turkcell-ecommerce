@@ -20,7 +20,7 @@ public class Cart {
     private int id;
 
     @Column(name="user_id")
-    private int user_id;
+    private int userId;
 
     @OneToMany(mappedBy = "cart")
     private List<ProductCart> productCarts;
