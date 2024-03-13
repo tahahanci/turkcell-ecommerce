@@ -20,7 +20,7 @@ public class District {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private  int districtID;
+    private int districtID;
 
 
     @Column(name="name")
