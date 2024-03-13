@@ -2,6 +2,8 @@ package com.tahahanci.turkcell_ecommerce.controllers;
 
 
 import com.tahahanci.turkcell_ecommerce.services.abstracts.ProductService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.cart.requests.CartAddRequest;
+import com.tahahanci.turkcell_ecommerce.services.dtos.cart.responses.CartListResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tahahanci.turkcell_ecommerce.entities.Cart;
@@ -23,12 +25,12 @@ public class CartsController {
     }
 
     @GetMapping
-    public List<Cart> getAll(){
+    public List<CartListResponse> getAll(){
         return cartService.getAll();
     }
 
     @PostMapping
-    public Cart addCategory(@RequestBody Cart cart){
+    public Cart addCategory(@RequestBody CartAddRequest cart){
         return cartService.add(cart);
     }
 

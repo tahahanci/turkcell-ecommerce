@@ -5,6 +5,7 @@ import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.UserRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.CartService;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.cart.requests.CartAddRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.AddUserRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.responses.UserListResponse;
@@ -32,7 +33,10 @@ public class UserServiceImpl implements UserService {
 
         Cart cart = new Cart();
         cart.setUserId(s.getId());
-        cartService.add(cart);
+
+        CartAddRequest cartAddRequest = new CartAddRequest();
+        cartAddRequest.setUserId(s.getId());
+        cartService.add(cartAddRequest);
     }
 
     @Override
