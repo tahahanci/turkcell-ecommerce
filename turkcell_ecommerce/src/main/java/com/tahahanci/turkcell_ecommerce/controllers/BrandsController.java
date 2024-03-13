@@ -1,6 +1,8 @@
 package com.tahahanci.turkcell_ecommerce.controllers;
 
 import com.tahahanci.turkcell_ecommerce.services.abstracts.BrandService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.brand.requests.AddBrandRequest;
+import com.tahahanci.turkcell_ecommerce.services.dtos.brand.responses.BrandListResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.tahahanci.turkcell_ecommerce.entities.Brand;
@@ -15,12 +17,12 @@ public class BrandsController {
     private final BrandService brandService;
 
     @GetMapping
-    public List<Brand> getAll(){
+    public List<BrandListResponse> getAll(){
         return brandService.getAll();
     }
 
     @PostMapping
-    public Brand addCategory(@RequestBody Brand brand){
+    public Brand addCategory(@RequestBody AddBrandRequest brand){
         return brandService.add(brand);
     }
 
