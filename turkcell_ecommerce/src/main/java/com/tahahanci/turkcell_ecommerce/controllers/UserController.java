@@ -2,6 +2,7 @@ package com.tahahanci.turkcell_ecommerce.controllers;
 
 import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.AddUserRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.responses.UserListResponse;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,12 @@ public class UserController {
 
     UserService userService;
     @PostMapping
-    public void add(User user) {
+    public void add(AddUserRequest user) {
         userService.add(user);
     }
 
     @GetMapping
-    public List<User> getAll() {
+    public List<UserListResponse> getAll() {
         return userService.getAll();
     }
 

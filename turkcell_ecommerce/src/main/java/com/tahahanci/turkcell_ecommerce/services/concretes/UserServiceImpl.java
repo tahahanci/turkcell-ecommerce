@@ -5,6 +5,7 @@ import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.UserRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.CartService;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.AddUserRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.responses.UserListResponse;
 import lombok.AllArgsConstructor;
@@ -21,23 +22,34 @@ public class UserServiceImpl implements UserService {
     private CartService cartService;
     //TODO -> bir user oluşturulduğunda usera direkt bir Cart atanacak
     @Override
-    public void add(User user) {
-        userRepository.save(user);
+    public void add(AddUserRequest user) {
+        User newUser = new User();
+        newUser.setName(user.getName());
+        newUser.setLastName(user.getLastName());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+
+        User s = userRepository.save(newUser);
+
         Cart cart = new Cart();
-        cart.setUserId(user.getId());
+        cart.setUserId(s.getId());
         cartService.add(cart);
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserListResponse> getAll() {
+        List<User> users = userRepository.findAll();
+
+        List<UserListResponse> userResponses = users.stream().map(user -> new UserListResponse(user.getName(), user.getLastName())).collect(Collectors.toList());
+
+        return userResponses;
     }
 
     @Override
     public List<UserListResponse> searchByLetter(String letter) {
         List<User> users = userRepository.searchByLetter(letter);
+        List<UserListResponse> userResponses = users.stream().map(user -> new UserListResponse(user.getName(), user.getLastName())).collect(Collectors.toList());
 
-        return users.stream().map(user -> new UserListResponse(user.getId(), user.getName(), user.getLastName())).collect(Collectors.toList());
+        return userResponses;
     }
 
     @Override

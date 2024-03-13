@@ -1,8 +1,10 @@
 package com.tahahanci.turkcell_ecommerce.services.dtos.user.responses;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class UserListResponse {
 
-    private int id;
 
     private String name;
 
@@ -11,18 +13,9 @@ public class UserListResponse {
     public UserListResponse() {
     }
 
-    public UserListResponse(int id, String name, String lastName) {
-        this.id = id;
+    public UserListResponse(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -23,4 +23,6 @@ public class BrandsController {
     public Brand addCategory(@RequestBody Brand brand){
         return brandService.add(brand);
     }
+
+
 }
