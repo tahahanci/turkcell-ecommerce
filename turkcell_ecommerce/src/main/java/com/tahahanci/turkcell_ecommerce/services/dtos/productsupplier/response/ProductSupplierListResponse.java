@@ -9,4 +9,9 @@ public class ProductSupplierListResponse {
 
     private String supplierName;
     private String productName;
+
+    public ProductSupplierListResponse(String supplierName, String productName) {
+        this.supplierName = supplierName;
+        this.productName = productName;
+    }
 }
