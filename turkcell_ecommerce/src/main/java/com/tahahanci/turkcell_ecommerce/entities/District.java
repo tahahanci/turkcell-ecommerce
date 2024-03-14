@@ -22,10 +22,8 @@ public class District {
     @Id
     private int districtID;
 
-
     @Column(name="name")
     private String districtName;
-
 
     @ManyToOne()
     @JoinColumn(name="cityid")
