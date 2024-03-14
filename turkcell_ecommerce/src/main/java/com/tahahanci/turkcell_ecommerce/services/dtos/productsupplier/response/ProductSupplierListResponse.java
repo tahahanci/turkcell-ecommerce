@@ -14,4 +14,6 @@ public class ProductSupplierListResponse {
         this.supplierName = supplierName;
         this.productName = productName;
     }
+
+    public ProductSupplierListResponse() {}
 }
