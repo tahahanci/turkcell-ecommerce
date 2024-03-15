@@ -2,6 +2,7 @@ package com.tahahanci.turkcell_ecommerce.controllers;
 
 import com.tahahanci.turkcell_ecommerce.services.abstracts.CityService;
 import com.tahahanci.turkcell_ecommerce.services.dtos.city.request.AddCityRequest;
+import com.tahahanci.turkcell_ecommerce.services.dtos.city.request.DeleteCityRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.city.response.CityListResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,11 @@ public class CitiesController {
     @GetMapping("search")
     public List<CityListResponse> search(@RequestParam String query) {
         return cityService.searchDto(query);
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody DeleteCityRequest deleteCityRequest) {
+        cityService.delete(deleteCityRequest);
     }
 
 }

@@ -1,10 +1,5 @@
 package com.tahahanci.turkcell_ecommerce.services.dtos.city.response;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class CityListResponse {
 
     private String cityName;
@@ -12,6 +7,26 @@ public class CityListResponse {
 
     public CityListResponse(String cityName, String countryName) {
         this.cityName = cityName;
+        this.countryName = countryName;
+    }
+
+    public CityListResponse() {
+
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 }
