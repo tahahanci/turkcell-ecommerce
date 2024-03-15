@@ -1,11 +1,5 @@
 package com.tahahanci.turkcell_ecommerce.services.dtos.country.response;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class CountryListResponse {
 
     private String countryName;
@@ -15,4 +9,12 @@ public class CountryListResponse {
     }
 
     public CountryListResponse() {}
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
 }

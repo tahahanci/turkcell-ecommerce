@@ -6,6 +6,7 @@ import com.tahahanci.turkcell_ecommerce.entities.Country;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.CountryRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.CountryService;
 import com.tahahanci.turkcell_ecommerce.services.dtos.country.request.AddCountryRequest;
+import com.tahahanci.turkcell_ecommerce.services.dtos.country.request.DeleteCountryRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.country.response.CountryListResponse;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +32,24 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public void delete(DeleteCountryRequest deleteCountryRequest) {
+        isCountryExist(deleteCountryRequest.getCountryName());
+        List<Country> countries = countryRepository.findAll();
+        for (Country country : countries) {
+            if (country.getCountryName().equals(deleteCountryRequest.getCountryName())) {
+                countryRepository.delete(country);
+            }
+        }
+    }
+
+    @Override
     public List<CountryListResponse> getAll() {
         List<Country> countryList = countryRepository.findAll();
         List<CountryListResponse> responses = new ArrayList<>();
 
         for (Country country : countryList) {
-            CountryListResponse dto = new CountryListResponse(country.getCountryName());
+            CountryListResponse dto = new CountryListResponse();
+            dto.setCountryName(country.getCountryName());
             responses.add(dto);
         }
         return responses;
@@ -57,5 +70,11 @@ public class CountryServiceImpl implements CountryService {
         Optional<Country> countryWithSameName = countryRepository.findByCountryName(name);
         if (countryWithSameName.isPresent())
             throw new BusinessException("You cannot add same country with same name!");
+    }
+
+    private void isCountryExist(String name) {
+        Optional<Country> countryExistChecker = countryRepository.findByCountryName(name);
+        if (countryExistChecker.isEmpty())
+            throw new BusinessException("Country is not exist!");
     }
 }
