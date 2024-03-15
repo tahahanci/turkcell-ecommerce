@@ -12,12 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestControllerAdvice
 public class GlobalExceptionHandler
 {
     @ExceptionHandler({BusinessException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleRuntimeException(BusinessException exception)
+    public String handleBusinessException(BusinessException exception)
     {
         return exception.getMessage();
     }

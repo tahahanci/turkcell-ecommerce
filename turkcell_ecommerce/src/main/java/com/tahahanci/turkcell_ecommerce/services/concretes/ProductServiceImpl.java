@@ -2,6 +2,7 @@ package com.tahahanci.turkcell_ecommerce.services.concretes;
 
 import com.tahahanci.turkcell_ecommerce.core.exception.types.BusinessException;
 import com.tahahanci.turkcell_ecommerce.core.services.abstracts.MessageService;
+import com.tahahanci.turkcell_ecommerce.entities.Brand;
 import com.tahahanci.turkcell_ecommerce.entities.Product;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.ProductRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.ProductService;
@@ -9,6 +10,7 @@ import com.tahahanci.turkcell_ecommerce.entities.Category;
 import com.tahahanci.turkcell_ecommerce.services.constants.Messages;
 import com.tahahanci.turkcell_ecommerce.services.dtos.product.requests.AddProductRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.product.responses.ProductListResponse;
+import com.tahahanci.turkcell_ecommerce.services.mappers.ProductMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,20 +32,8 @@ public class ProductServiceImpl implements ProductService
     public void add(AddProductRequest request) {
         // Aynı ürün isminden 2. ürün eklenemez.
         productWithSameNameShouldNotExists(request.getName());
-        // TODO: Check from db
-        Category category = new Category();
-        category.setId(request.getCategory_id());
-
-        // Mapping -> Manual
-        // TODO: Auto Mapping
-        Product product = new Product();
-        product.setName(request.getName());
-        product.setDescription(request.getDescription());
-        product.setPrice(request.getPrice());
-        product.setStock_quantity(request.getStock_quantity());
-        product.setCategory(category);
+        Product product = ProductMapper.INSTANCE.productFromAddRequest(request);
         productRepository.save(product);
-
     }
 
     private void productWithSameNameShouldNotExists(String name) {
@@ -68,14 +58,9 @@ public class ProductServiceImpl implements ProductService
     @Override
     public ProductListResponse getMostExpensive() {
         Product product = productRepository.getMostExpensiveProduct();
-        return new ProductListResponse(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getPrice(),
-                product.getCategory().getName()
-        );
 
+        ProductListResponse response = ProductMapper.INSTANCE.productToProductListResponse(product);
+        return response;
     }
 
     @Override
@@ -89,18 +74,10 @@ public class ProductServiceImpl implements ProductService
 
         List<ProductListResponse> response = new ArrayList<>();
         for (Product product: products) {
-            ProductListResponse dto = new ProductListResponse(
-                    product.getId(),
-                    product.getName(),
-                    product.getDescription(),
-                    product.getPrice(),
-                    product.getCategory().getName()
-            );
+            ProductListResponse dto = ProductMapper.INSTANCE.productToProductListResponse(product);
             response.add(dto);
         }
-
         return response;
-
     }
 
     @Override
@@ -112,13 +89,7 @@ public class ProductServiceImpl implements ProductService
         List<ProductListResponse> response = new ArrayList<>();
 
         for (Product product: products) {
-            ProductListResponse dto = new ProductListResponse(
-                    product.getId(),
-                    product.getName(),
-                    product.getDescription(),
-                    product.getPrice(),
-                    product.getCategory().getName()
-            );
+            ProductListResponse dto = ProductMapper.INSTANCE.productToProductListResponse(product);
             response.add(dto);
         }
         return response;
