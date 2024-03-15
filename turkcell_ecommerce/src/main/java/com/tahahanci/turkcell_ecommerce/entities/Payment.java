@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "payments")
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Payment {
     @Id
     @Column(name="id")
@@ -23,4 +20,38 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name="payment_method_id")
     private PaymentMethod paymentMethod;
+
+    public Payment() {
+    }
+
+    public Payment(Order order, PaymentMethod paymentMethod) {
+        this.order = order;
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+
 }

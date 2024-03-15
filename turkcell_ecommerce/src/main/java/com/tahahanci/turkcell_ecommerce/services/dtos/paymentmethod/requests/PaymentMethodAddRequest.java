@@ -6,13 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class PaymentMethodAddRequest {
 
     @NotNull
     private String name;
+
+    public PaymentMethodAddRequest() {
+    }
+
+    public PaymentMethodAddRequest(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }

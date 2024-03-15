@@ -1,10 +1,12 @@
 package com.tahahanci.turkcell_ecommerce.services.concretes;
 
 import com.tahahanci.turkcell_ecommerce.core.exception.types.BusinessException;
+import com.tahahanci.turkcell_ecommerce.core.services.abstracts.MessageService;
 import com.tahahanci.turkcell_ecommerce.entities.Product;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.ProductRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.ProductService;
 import com.tahahanci.turkcell_ecommerce.entities.Category;
+import com.tahahanci.turkcell_ecommerce.services.constants.Messages;
 import com.tahahanci.turkcell_ecommerce.services.dtos.product.requests.AddProductRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.product.responses.ProductListResponse;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService
 {
     private ProductRepository productRepository;
+    private final MessageService messageService;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, MessageService messageService) {
         this.productRepository = productRepository;
+        this.messageService = messageService;
     }
 
     @Override
@@ -46,7 +50,7 @@ public class ProductServiceImpl implements ProductService
         Optional<Product> productWithSameName =
                 productRepository.findByName(name);
         if(productWithSameName.isPresent())
-            throw new BusinessException("Aynı isimde 2. ürün eklenemez");
+            throw new BusinessException(messageService.getMessageWithArgs(Messages.BusinessErrors.SAME_PRODUCT_ERROR, name));
     }
 
     @Override

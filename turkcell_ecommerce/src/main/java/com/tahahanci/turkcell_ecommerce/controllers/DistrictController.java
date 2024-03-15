@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/districts")
 public class DistrictController {
 
     private final DistrictService districtService;
+
+    public DistrictController(DistrictService districtService) {
+        this.districtService = districtService;
+    }
 
     @GetMapping
     public List<DistrictListResponse> getAll() {

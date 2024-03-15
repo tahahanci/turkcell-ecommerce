@@ -11,10 +11,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/brands")
-@AllArgsConstructor
 public class BrandsController {
 
     private final BrandService brandService;
+
+    public BrandsController(BrandService brandService) {
+        this.brandService = brandService;
+    }
+
+
 
     @GetMapping
     public List<BrandListResponse> getAll(){

@@ -8,10 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "addresses")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Address {
 
     @Column(name = "id")
@@ -37,4 +33,72 @@ public class Address {
 
     @Column(name = "receiver_phone_number")
     private String receiverPhoneNumber;
+
+    public Address() {
+    }
+
+    public Address(String addressName, String addressDescription, District district, String receiverName, String receiverSurname, String receiverPhoneNumber) {
+        this.addressName = addressName;
+        this.addressDescription = addressDescription;
+        this.district = district;
+        this.receiverName = receiverName;
+        this.receiverSurname = receiverSurname;
+        this.receiverPhoneNumber = receiverPhoneNumber;
+    }
+
+    public int getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
+    }
+
+    public String getAddressDescription() {
+        return addressDescription;
+    }
+
+    public void setAddressDescription(String addressDescription) {
+        this.addressDescription = addressDescription;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverSurname() {
+        return receiverSurname;
+    }
+
+    public void setReceiverSurname(String receiverSurname) {
+        this.receiverSurname = receiverSurname;
+    }
+
+    public String getReceiverPhoneNumber() {
+        return receiverPhoneNumber;
+    }
+
+    public void setReceiverPhoneNumber(String receiverPhoneNumber) {
+        this.receiverPhoneNumber = receiverPhoneNumber;
+    }
 }

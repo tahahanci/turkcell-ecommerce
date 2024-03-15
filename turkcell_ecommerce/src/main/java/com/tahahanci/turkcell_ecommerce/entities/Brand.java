@@ -10,9 +10,6 @@ import java.util.List;
 
 @Table(name="brands")
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Brand {
 
     @Column(name="id")
@@ -26,4 +23,35 @@ public class Brand {
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
     private List<Product> products;
+
+    public Brand() {
+    }
+
+    public Brand(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }

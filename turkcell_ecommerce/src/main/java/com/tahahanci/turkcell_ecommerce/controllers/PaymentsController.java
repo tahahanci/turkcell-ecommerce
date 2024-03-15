@@ -10,10 +10,13 @@ import com.tahahanci.turkcell_ecommerce.services.abstracts.PaymentService;
 
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/payments")
 public class PaymentsController {
     private final PaymentService paymentService;
+
+    public PaymentsController(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
     @GetMapping
     public List<PaymentListResponse> getAll() {

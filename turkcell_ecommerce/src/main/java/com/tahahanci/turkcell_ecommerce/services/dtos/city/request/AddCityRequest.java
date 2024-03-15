@@ -7,8 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 
-@Getter
-@Setter
+
 public class AddCityRequest {
 
     @NotBlank(message = "City name cannot blank!")
@@ -25,4 +24,20 @@ public class AddCityRequest {
     }
 
     public AddCityRequest() {}
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public int getCountryID() {
+        return countryID;
+    }
+
+    public void setCountryID(int countryID) {
+        this.countryID = countryID;
+    }
 }

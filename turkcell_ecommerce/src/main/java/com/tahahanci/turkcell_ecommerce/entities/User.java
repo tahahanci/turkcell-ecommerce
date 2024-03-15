@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Table(name="users")
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class User {
 
@@ -45,6 +43,17 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+
+    public User() {
+    }
+
+    public User(String name, String lastName, String email, String phoneNumber, String password) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
 
     public int getId() {
         return id;

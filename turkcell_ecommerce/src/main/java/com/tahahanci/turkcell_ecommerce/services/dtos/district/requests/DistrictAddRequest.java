@@ -1,19 +1,10 @@
 package com.tahahanci.turkcell_ecommerce.services.dtos.district.requests;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class DistrictAddRequest {
 
     @Min(1)
@@ -23,4 +14,30 @@ public class DistrictAddRequest {
     @NotBlank(message = "This field cannot be empty")
     @Size(max = 100, message = "This field cannot be greater than 100 char")
     private String name;
+
+    public DistrictAddRequest() {
+    }
+
+    public DistrictAddRequest(int cityId, String name) {
+        this.cityId = cityId;
+        this.name = name;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }

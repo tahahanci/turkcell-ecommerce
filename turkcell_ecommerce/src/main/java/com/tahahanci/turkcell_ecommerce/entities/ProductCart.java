@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import jakarta.persistence.*;
 
 @Table(name = "products_carts")
-@Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductCart {
 
     @Id
@@ -24,5 +21,41 @@ public class ProductCart {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    public ProductCart() {
+    }
+
+    public ProductCart(Cart cart, Product product) {
+        this.cart = cart;
+        this.product = product;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+
+
 
 }

@@ -16,4 +16,14 @@ public class AddCountryRequest {
     }
 
     public AddCountryRequest() {}
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+
 }

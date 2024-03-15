@@ -8,11 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Table(name = "paymentmethods")
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "paymentmethods")
 public class PaymentMethod {
     @Id
     @Column(name="id")
@@ -25,4 +22,35 @@ public class PaymentMethod {
     @JsonIgnore
     @OneToMany(mappedBy = "paymentMethod")
     private List<Payment> payments;
+
+    public PaymentMethod() {
+    }
+
+    public PaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
 }

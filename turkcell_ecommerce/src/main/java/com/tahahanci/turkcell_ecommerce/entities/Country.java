@@ -11,10 +11,6 @@ import java.util.List;
 
 @Table(name = "countries")
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Country {
 
     @Column(name = "id")
@@ -27,4 +23,37 @@ public class Country {
     @OneToMany(mappedBy = "country")
     @JsonIgnore // TODO: remove after dto
     private List<City> cities;
+
+    public Country() {
+    }
+
+    public Country(int countryID, String countryName, List<City> cities) {
+        this.countryID = countryID;
+        this.countryName = countryName;
+        this.cities = cities;
+    }
+
+    public int getCountryID() {
+        return countryID;
+    }
+
+    public void setCountryID(int countryID) {
+        this.countryID = countryID;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
 }

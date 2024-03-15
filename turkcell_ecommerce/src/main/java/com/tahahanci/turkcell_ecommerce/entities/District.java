@@ -11,10 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "districts")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class District {
 
     @Column(name = "id")
@@ -32,4 +28,44 @@ public class District {
     @OneToMany(mappedBy = "district")
     @JsonIgnore
     private List<Address> addres;
+
+    public District() {
+    }
+
+    public District(String districtName, City city) {
+        this.districtName = districtName;
+        this.city = city;
+    }
+
+    public int getDistrictID() {
+        return districtID;
+    }
+
+    public void setDistrictID(int districtID) {
+        this.districtID = districtID;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public List<Address> getAddres() {
+        return addres;
+    }
+
+    public void setAddres(List<Address> addres) {
+        this.addres = addres;
+    }
 }

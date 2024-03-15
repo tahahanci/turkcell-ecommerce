@@ -5,10 +5,6 @@ import lombok.*;
 
 @Table(name = "discounts")
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Discount {
 
     @Column(name = "id")
@@ -20,4 +16,37 @@ public class Discount {
     private ProductSupplier productSupplier;
     @Column(name = "rate")
     private double discountRate;
+
+    public Discount() {
+    }
+
+    public Discount(int discountID, ProductSupplier productSupplier, double discountRate) {
+        this.discountID = discountID;
+        this.productSupplier = productSupplier;
+        this.discountRate = discountRate;
+    }
+
+    public int getDiscountID() {
+        return discountID;
+    }
+
+    public void setDiscountID(int discountID) {
+        this.discountID = discountID;
+    }
+
+    public ProductSupplier getProductSupplier() {
+        return productSupplier;
+    }
+
+    public void setProductSupplier(ProductSupplier productSupplier) {
+        this.productSupplier = productSupplier;
+    }
+
+    public double getDiscountRate() {
+        return discountRate;
+    }
+
+    public void setDiscountRate(double discountRate) {
+        this.discountRate = discountRate;
+    }
 }

@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Table(name="wishlistitems")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class WishListItem {
 
@@ -24,4 +21,36 @@ public class WishListItem {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    public WishListItem() {
+    }
+
+    public WishListItem(Product product, User user) {
+        this.product = product;
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
