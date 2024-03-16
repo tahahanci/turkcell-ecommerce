@@ -71,6 +71,9 @@ public class ProductServiceImpl implements ProductService
     @Override
     public List<ProductListResponse> getProductsByCategoryName(String categoryName) {
         List<Product> products = productRepository.getProductsByCategoryName(categoryName);
+        if(products.isEmpty())
+            throw new BusinessException(messageService.getMessageWithArgs(Messages.BusinessErrors.NO_PRODUCT_WITH_CATEGORY_ERROR, categoryName));
+
 
         List<ProductListResponse> response = new ArrayList<>();
         for (Product product: products) {
@@ -79,6 +82,8 @@ public class ProductServiceImpl implements ProductService
         }
         return response;
     }
+
+
 
     @Override
     public int getNumberOfProductsByBrandName(String brandName) {

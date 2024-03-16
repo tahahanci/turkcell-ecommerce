@@ -1,5 +1,7 @@
 package com.tahahanci.turkcell_ecommerce.services.concretes;
 
+import com.tahahanci.turkcell_ecommerce.core.exception.types.BusinessException;
+import com.tahahanci.turkcell_ecommerce.core.services.abstracts.MessageService;
 import com.tahahanci.turkcell_ecommerce.entities.Product;
 import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.entities.WishListItem;
@@ -7,6 +9,7 @@ import com.tahahanci.turkcell_ecommerce.repositories.abstracts.ProductRepository
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.UserRepository;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.WishListItemRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.WishListItemsService;
+import com.tahahanci.turkcell_ecommerce.services.constants.Messages;
 import com.tahahanci.turkcell_ecommerce.services.dtos.wishlistitem.requests.WishListItemAddRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.wishlistitem.responses.WishListGetAllResponse;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,13 @@ public class WishListItemsServiceImpl implements WishListItemsService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    public WishListItemsServiceImpl(WishListItemRepository wishListItemRepository, UserRepository userRepository, ProductRepository productRepository) {
+    private final MessageService messageService;
+
+    public WishListItemsServiceImpl(WishListItemRepository wishListItemRepository, UserRepository userRepository, ProductRepository productRepository, MessageService messageService) {
         this.wishListItemRepository = wishListItemRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.messageService = messageService;
     }
 
 
@@ -52,9 +58,15 @@ public class WishListItemsServiceImpl implements WishListItemsService {
         WishListItem wishListItem = new WishListItem();
 
         User user = userRepository.findById(id).get();
+        if (user == null) {
+            throw new BusinessException(messageService.getMessageWithArgs(Messages.BusinessErrors.USER_NOT_FOUND_FOR_WISHLIST, user.getId()));
+        }
         wishListItem.setUser(user);
 
         Product product = productRepository.findById(wishListItemAddRequest.getProductId()).get();
+        if (product == null) {
+            throw new BusinessException(messageService.getMessageWithArgs(Messages.BusinessErrors.PRODUCT_NOT_FOUND_FOR_WISHLIST, product.getId()));
+        }
         wishListItem.setProduct(product);
 
         wishListItem.setUser(user);
@@ -62,4 +74,5 @@ public class WishListItemsServiceImpl implements WishListItemsService {
 
         wishListItemRepository.save(wishListItem);
     }
+
 }

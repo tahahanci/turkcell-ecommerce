@@ -1,10 +1,13 @@
 package com.tahahanci.turkcell_ecommerce.services.concretes;
 
+import com.tahahanci.turkcell_ecommerce.core.exception.types.BusinessException;
+import com.tahahanci.turkcell_ecommerce.core.services.abstracts.MessageService;
 import com.tahahanci.turkcell_ecommerce.entities.Cart;
 import com.tahahanci.turkcell_ecommerce.entities.User;
 import com.tahahanci.turkcell_ecommerce.repositories.abstracts.UserRepository;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.CartService;
 import com.tahahanci.turkcell_ecommerce.services.abstracts.UserService;
+import com.tahahanci.turkcell_ecommerce.services.constants.Messages;
 import com.tahahanci.turkcell_ecommerce.services.dtos.cart.requests.CartAddRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.AddUserRequest;
 import com.tahahanci.turkcell_ecommerce.services.dtos.user.requests.UpdatePhoneNumberRequest;
@@ -16,15 +19,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private CartService cartService;
+    private final UserRepository userRepository;
+    private final CartService cartService;
+    private final MessageService messageService;
+
+    public UserServiceImpl(UserRepository userRepository, CartService cartService, MessageService messageService) {
+        this.userRepository = userRepository;
+        this.cartService = cartService;
+        this.messageService = messageService;
+    }
+
+
     //TODO -> bir user oluşturulduğunda usera direkt bir Cart atanacak
     @Override
     public void add(AddUserRequest user) {
         User newUser = new User();
+        //check if there is a user with this name, lastname and phonenumber
+        System.out.println("HERE 1");
+        if(userRepository.existsByNameAndLastNameAndPhoneNumber(user.getName(), user.getLastName(), user.getPhoneNumber()) != null){
+            System.out.println("User already exists");
+            throw new BusinessException(messageService.getMessageWithArgs(Messages.BusinessErrors.USER_ALREADY_EXIST, user.getName(), user.getLastName(), user.getPhoneNumber()));
+        }
+
+        System.out.println("HERE 2");
+
         newUser.setName(user.getName());
         newUser.setLastName(user.getLastName());
         newUser.setPhoneNumber(user.getPhoneNumber());

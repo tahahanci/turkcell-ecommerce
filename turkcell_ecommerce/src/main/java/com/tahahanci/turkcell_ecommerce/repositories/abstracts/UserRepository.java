@@ -25,4 +25,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("UPDATE User u SET u.phoneNumber = :phoneNumber WHERE u.id = :id")
     @Transactional
     void updatePhoneNumber(@Param("id") int id, @Param("phoneNumber") String phoneNumber);
+
+    @Query("SELECT e FROM User e WHERE e.name = :name AND e.lastName = :lastName AND e.phoneNumber = :phoneNumber")
+    User existsByNameAndLastNameAndPhoneNumber(String name, String lastName, String phoneNumber);
 }
